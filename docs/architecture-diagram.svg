@@ -1,0 +1,270 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="50%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <!-- Card Gradients -->
+    <linearGradient id="cardGradClient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="cardGradMiddleware" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#312E81"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </linearGradient>
+    <linearGradient id="cardGradController" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="cardGradService" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#312E81"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </linearGradient>
+    <linearGradient id="cardGradData" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <!-- Arrow Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#818CF8"/>
+    </marker>
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38BDF8"/>
+    </marker>
+
+    <!-- Drop Shadows -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bgGrad)"/>
+
+  <!-- Subtle Grid Overlay -->
+  <g opacity="0.05" stroke="#FFFFFF" stroke-width="1">
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="none"/>
+      <path d="M 40 0 L 0 0 0 40"/>
+    </pattern>
+    <rect width="1280" height="720" fill="url(#grid)"/>
+  </g>
+
+  <!-- HEADER -->
+  <g transform="translate(640, 50)">
+    <text text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#F8FAFC" letter-spacing="1">
+      DIAGRAM ARSITEKTUR SISTEM &amp; ALUR PEMROSESAN REQUEST
+    </text>
+    <text y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#818CF8" letter-spacing="0.5">
+      Modul Product Management Service — Laravel 12 &amp; Inertia React (Enterprise Architecture)
+    </text>
+  </g>
+
+  <!-- CONNECTING LINES (PIPELINE FLOW) -->
+  <!-- Line 1: Client -> Middleware -->
+  <path d="M 230 330 L 270 330" stroke="#818CF8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- Line 2: Middleware -> Controller -->
+  <path d="M 520 330 L 560 330" stroke="#818CF8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Line 3: Controller -> Service -->
+  <path d="M 780 330 L 820 330" stroke="#818CF8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Line 4: Service -> Data Layer -->
+  <path d="M 1020 330 L 1060 330" stroke="#818CF8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- LAYER 1: CLIENT LAYER -->
+  <g transform="translate(40, 120)" filter="url(#shadow)">
+    <rect width="190" height="420" rx="12" fill="url(#cardGradClient)" stroke="#475569" stroke-width="1.5"/>
+    <!-- Header Box -->
+    <rect width="190" height="46" rx="12" fill="#334155"/>
+    <rect y="36" width="190" height="10" fill="#334155"/>
+    <text x="95" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#38BDF8">
+      1. CLIENT LAYER
+    </text>
+
+    <!-- Sub-Cards -->
+    <g transform="translate(15, 65)">
+      <rect width="160" height="95" rx="8" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <text x="80" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#F8FAFC">Web Portal Admin</text>
+      <text x="80" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8">Inertia.js v2 + React 19</text>
+      <text x="80" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8">TypeScript + Tailwind v4</text>
+      <text x="80" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#38BDF8">Dashboard &amp; Catalog</text>
+    </g>
+
+    <g transform="translate(15, 175)">
+      <rect width="160" height="95" rx="8" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <text x="80" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#F8FAFC">REST API Client</text>
+      <text x="80" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8">Third-Party Systems</text>
+      <text x="80" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8">Bearer Token Sanctum</text>
+      <text x="80" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#38BDF8">JSON API Request</text>
+    </g>
+
+    <g transform="translate(15, 285)">
+      <rect width="160" height="95" rx="8" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <text x="80" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#F8FAFC">Swagger API UI</text>
+      <text x="80" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8">OpenAPI 3.0 Specs</text>
+      <text x="80" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8">/api/documentation</text>
+      <text x="80" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#38BDF8">Interactive Testing</text>
+    </g>
+  </g>
+
+  <!-- LAYER 2: MIDDLEWARE PIPELINE -->
+  <g transform="translate(270, 120)" filter="url(#shadow)">
+    <rect width="250" height="420" rx="12" fill="url(#cardGradMiddleware)" stroke="#6366F1" stroke-width="2"/>
+    <!-- Header Box -->
+    <rect width="250" height="46" rx="12" fill="#4338CA"/>
+    <rect y="36" width="250" height="10" fill="#4338CA"/>
+    <text x="125" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#FFFFFF">
+      2. MIDDLEWARE STACK PIPELINE
+    </text>
+
+    <!-- Sub-Cards Step 1-4 -->
+    <g transform="translate(15, 60)">
+      <rect width="220" height="75" rx="6" fill="#1E1B4B" stroke="#818CF8" stroke-width="1"/>
+      <text x="12" y="22" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#A5B4FC">1. AssignRequestId</text>
+      <text x="12" y="40" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">Generates X-Request-ID Header</text>
+      <text x="12" y="56" font-family="Arial, sans-serif" font-size="9" fill="#818CF8">Tracing ID for all log events</text>
+    </g>
+
+    <g transform="translate(15, 145)">
+      <rect width="220" height="75" rx="6" fill="#1E1B4B" stroke="#818CF8" stroke-width="1"/>
+      <text x="12" y="22" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#A5B4FC">2. LogProductApiActivity</text>
+      <text x="12" y="40" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">Logs technical API details</text>
+      <text x="12" y="56" font-family="Arial, sans-serif" font-size="9" fill="#818CF8">Writes to storage/logs/product.log</text>
+    </g>
+
+    <g transform="translate(15, 230)">
+      <rect width="220" height="75" rx="6" fill="#1E1B4B" stroke="#818CF8" stroke-width="1"/>
+      <text x="12" y="22" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#A5B4FC">3. MonitorApiPerformance</text>
+      <text x="12" y="40" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">Measures X-Response-Time-Ms</text>
+      <text x="12" y="56" font-family="Arial, sans-serif" font-size="9" stroke="none" fill="#F59E0B">Alert Warning if duration &gt;= 500ms</text>
+    </g>
+
+    <g transform="translate(15, 315)">
+      <rect width="220" height="85" rx="6" fill="#1E1B4B" stroke="#34D399" stroke-width="1.5"/>
+      <text x="12" y="22" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#34D399">4. AuditProductActivity ★</text>
+      <text x="12" y="40" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">Business Audit Logging (Single Entry)</text>
+      <text x="12" y="56" font-family="Arial, sans-serif" font-size="9" fill="#A7F3D0">Captures ProductCreated/Updated/Deleted</text>
+      <text x="12" y="70" font-family="Arial, sans-serif" font-size="9" fill="#A7F3D0">Writes 1x directly to product_audits DB</text>
+    </g>
+  </g>
+
+  <!-- LAYER 3: CONTROLLER & POLICY -->
+  <g transform="translate(560, 120)" filter="url(#shadow)">
+    <rect width="220" height="420" rx="12" fill="url(#cardGradController)" stroke="#475569" stroke-width="1.5"/>
+    <!-- Header Box -->
+    <rect width="220" height="46" rx="12" fill="#334155"/>
+    <rect y="36" width="220" height="10" fill="#334155"/>
+    <text x="110" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#38BDF8">
+      3. CONTROLLER &amp; POLICY
+    </text>
+
+    <!-- Sub-Cards -->
+    <g transform="translate(15, 65)">
+      <rect width="190" height="95" rx="8" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <text x="95" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#F8FAFC">Web &amp; API Controller</text>
+      <text x="95" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#94A3B8">ProductController (API)</text>
+      <text x="95" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#94A3B8">ProductPageController (Web)</text>
+      <text x="95" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#38BDF8">Delegates to Service Layer</text>
+    </g>
+
+    <g transform="translate(15, 175)">
+      <rect width="190" height="95" rx="8" fill="#1E293B" stroke="#6366F1" stroke-width="1"/>
+      <text x="95" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#A5B4FC">ProductPolicy (RBAC)</text>
+      <text x="95" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">Admin: Full Access CRUD</text>
+      <text x="95" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">Manager: Create/Update/Restock</text>
+      <text x="95" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#F43F5E">Viewer: Read-Only (403)</text>
+    </g>
+
+    <g transform="translate(15, 285)">
+      <rect width="190" height="95" rx="8" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <text x="95" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#F8FAFC">Form Validation</text>
+      <text x="95" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#94A3B8">StoreProductRequest</text>
+      <text x="95" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#94A3B8">Update / Restock Request</text>
+      <text x="95" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#38BDF8">Rule::enum &amp; SKU Unique</text>
+    </g>
+  </g>
+
+  <!-- LAYER 4: SERVICE & REPOSITORY -->
+  <g transform="translate(820, 120)" filter="url(#shadow)">
+    <rect width="200" height="420" rx="12" fill="url(#cardGradService)" stroke="#6366F1" stroke-width="1.5"/>
+    <!-- Header Box -->
+    <rect width="200" height="46" rx="12" fill="#4338CA"/>
+    <rect y="36" width="200" height="10" fill="#4338CA"/>
+    <text x="100" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#FFFFFF">
+      4. SERVICE &amp; REPO
+    </text>
+
+    <!-- Sub-Cards -->
+    <g transform="translate(15, 65)">
+      <rect width="170" height="150" rx="8" fill="#1E1B4B" stroke="#818CF8" stroke-width="1"/>
+      <text x="85" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#A5B4FC">ProductService</text>
+      <text x="85" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">• Business Logic</text>
+      <text x="85" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">• DB Transactions</text>
+      <text x="85" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">• LockForUpdate Restock</text>
+      <text x="85" y="98" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">• Soft Delete &amp; Restore</text>
+      <text x="85" y="116" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">• Purge Permanent</text>
+      <text x="85" y="136" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#34D399">Cache::flush()</text>
+    </g>
+
+    <g transform="translate(15, 235)">
+      <rect width="170" height="145" rx="8" fill="#1E1B4B" stroke="#818CF8" stroke-width="1"/>
+      <text x="85" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#A5B4FC">ProductRepository</text>
+      <text x="85" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">• ProductFilterDTO</text>
+      <text x="85" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">• Search Name &amp; SKU</text>
+      <text x="85" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">• Category/Status Filter</text>
+      <text x="85" y="98" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">• Dynamic Sorting</text>
+      <text x="85" y="116" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#C7D2FE">• Pagination Capping</text>
+      <text x="85" y="133" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#38BDF8">Eloquent Builder</text>
+    </g>
+  </g>
+
+  <!-- LAYER 5: PERSISTENCE & AUDIT LOG -->
+  <g transform="translate(1060, 120)" filter="url(#shadow)">
+    <rect width="180" height="420" rx="12" fill="url(#cardGradData)" stroke="#475569" stroke-width="1.5"/>
+    <!-- Header Box -->
+    <rect width="180" height="46" rx="12" fill="#334155"/>
+    <rect y="36" width="180" height="10" fill="#334155"/>
+    <text x="90" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#38BDF8">
+      5. DATA &amp; AUDIT
+    </text>
+
+    <!-- Sub-Cards -->
+    <g transform="translate(15, 65)">
+      <rect width="150" height="95" rx="8" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <text x="75" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#F8FAFC">products DB</text>
+      <text x="75" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#94A3B8">Digital Product Items</text>
+      <text x="75" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#94A3B8">SKU-DIG Catalog</text>
+      <text x="75" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#38BDF8">SoftDeletes Table</text>
+    </g>
+
+    <g transform="translate(15, 175)">
+      <rect width="150" height="95" rx="8" fill="#1E293B" stroke="#34D399" stroke-width="1.5"/>
+      <text x="75" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#34D399">product_audits</text>
+      <text x="75" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#A7F3D0">Business Audit Trail</text>
+      <text x="75" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#A7F3D0">User, IP, Event, Payload</text>
+      <text x="75" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#34D399">1x Single Record</text>
+    </g>
+
+    <g transform="translate(15, 285)">
+      <rect width="150" height="95" rx="8" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+      <text x="75" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#F8FAFC">product.log</text>
+      <text x="75" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#94A3B8">Technical Monolog</text>
+      <text x="75" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="9.5" fill="#94A3B8">storage/logs/product.log</text>
+      <text x="75" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#F59E0B">Slow Alert Logger</text>
+    </g>
+  </g>
+
+  <!-- FOOTER BANNER -->
+  <g transform="translate(640, 680)">
+    <text text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#64748B">
+      Product Management Service Architecture Diagram • Document ID: DOC-BNSP-2026-ARCH • High Availability &amp; Enterprise Single-Point Audit Logging
+    </text>
+  </g>
+</svg>

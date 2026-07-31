@@ -12,26 +12,38 @@ final class ProductFactory extends Factory
 {
     public function definition(): array
     {
-        $subjects = ['Pemrograman', 'Matematika', 'Sejarah', 'Filsafat', 'Biologi', 'Manajemen', 'Psikologi', 'Astronomi', 'Sastra', 'Sosiologi'];
-        $modifiers = ['Dasar-Dasar', 'Panduan Praktis', 'Analisis Mendalam', 'Teori Kontemporer', 'Pengantar', 'Metode Modern', 'Sejarah Ringkas', 'Studi Kasus'];
+        $productLines = [
+            'CloudSync', 'DataForge', 'PayLink', 'SecureGate', 'AppPulse',
+            'MediaHub', 'CodeNest', 'InsightAI', 'FlowOps', 'PixelStream',
+        ];
+        $editions = [
+            'Starter', 'Standard', 'Pro', 'Business', 'Enterprise', 'Ultimate',
+        ];
+        $formats = [
+            'License Key', 'SaaS Seat', 'API Quota Pack', 'Digital Download',
+            'Activation Code', 'Cloud Credit Bundle', 'Addon Module',
+        ];
 
-        $title = fake()->randomElement($modifiers) . ' ' . fake()->randomElement($subjects) . ' Vol. ' . fake()->numberBetween(1, 5);
-        $author = fake()->name();
-        $publisher = fake()->company();
+        $line = fake()->randomElement($productLines);
+        $edition = fake()->randomElement($editions);
+        $format = fake()->randomElement($formats);
+        $name = "{$line} {$edition} — {$format}";
+        $sku = 'SKU-DIG-'.strtoupper(fake()->unique()->bothify('??###'));
 
         return [
             'category_id' => Category::factory(),
-            'name' => $title,
-            'sku' => 'SKU-ISBN-' . fake()->unique()->numberBetween(1000000000000, 9999999999999),
-            'description' => "Buku referensi ilmiah berfokus pada topik {$title}. Ditulis oleh {$author} dan diterbitkan oleh {$publisher}. Sangat cocok untuk bahan ajar dan riset perpustakaan akademis.",
-            'price' => fake()->numberBetween(35000, 250000),
-            'stock' => fake()->numberBetween(0, 50),
+            'name' => $name,
+            'sku' => $sku,
+            'description' => "Produk digital {$name} untuk katalog internal perusahaan. Cocok untuk lisensi software, langganan SaaS, kuota API, atau aset digital operasional.",
+            'price' => fake()->numberBetween(99000, 9999000),
+            'stock' => fake()->numberBetween(0, 2000),
             'status' => fake()->randomElement(ProductStatus::cases())->value,
             'metadata' => [
-                'author' => $author,
-                'publisher' => $publisher,
-                'year' => fake()->numberBetween(1990, 2026),
-                'source' => 'library_factory',
+                'vendor' => fake()->company(),
+                'platform' => fake()->randomElement(['web', 'android', 'ios', 'desktop', 'api', 'multi']),
+                'delivery' => fake()->randomElement(['license_key', 'subscription', 'download', 'api_token', 'service_activation']),
+                'billing_model' => fake()->randomElement(['one_time', 'monthly', 'annual', 'usage_based']),
+                'source' => 'digital_factory',
             ],
         ];
     }

@@ -1,0 +1,419 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Product Management Service API",
+        "description": "Enterprise REST API Documentation untuk Modul Product Management Service Perusahaan Digital (Laravel 12)",
+        "contact": {
+            "name": "Product Engineering Team",
+            "email": "admin@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:9091",
+            "description": "Primary API Server"
+        }
+    ],
+    "paths": {
+        "/api/v1/health": {
+            "get": {
+                "tags": [
+                    "Health"
+                ],
+                "summary": "Health Check Endpoint",
+                "operationId": "011ea5bf03d84e0ba629dd042535bbea",
+                "responses": {
+                    "200": {
+                        "description": "Status kesehatan layanan dan database"
+                    }
+                }
+            }
+        },
+        "/api/v1/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Daftar & Pencarian Produk Digital",
+                "operationId": "f3999c72d35bf1bbfc6bebb75d1d43f3",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Cari nama atau SKU produk",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter status (active, inactive, archived)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Filter ULID kategori",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Urutan (latest, name_asc, price_asc, stock_desc, dll.)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Jumlah data per halaman (max 100)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Daftar produk terpaginasi"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Tambah Produk Digital Baru",
+                "operationId": "3e053eea138ae729426bd5b463330428",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "category_id",
+                                    "name",
+                                    "sku",
+                                    "description",
+                                    "price",
+                                    "stock",
+                                    "status"
+                                ],
+                                "properties": {
+                                    "category_id": {
+                                        "type": "string",
+                                        "example": "01kyvtm5cb8ga4b8jbav4e3c50"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "NovaDesk Pro License"
+                                    },
+                                    "sku": {
+                                        "type": "string",
+                                        "example": "SKU-DIG-NDP-001"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Lisensi perpetual software desktop"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": 2499000
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": 100
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Produk berhasil dibuat"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/products/{product}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Detail Satu Produk Digital",
+                "operationId": "6e98aefc386da7bcd36afd7bcbe4e5a1",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "ULID produk",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail objek produk"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Perbarui Data Produk Digital",
+                "operationId": "8c606ce0772cc0fa1473484f6168ad1f",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "ULID produk",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "NovaDesk Pro License v2"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": 2799000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produk berhasil diperbarui"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Soft Delete Produk Digital",
+                "operationId": "1e2e17ac07f985e81aec5a373d3c52fd",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "ULID produk",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produk dipindahkan ke trash"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/products/{product}/stock": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Adjust Stok Produk Digital",
+                "operationId": "af9fa29156492d2ca2fecbc6a5e04ce2",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "ULID produk",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": 50
+                                    },
+                                    "reason": {
+                                        "type": "string",
+                                        "example": "Top-up kuota dari vendor"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Stok berhasil ditambah dan audit tercatat"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/products/trashed": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Daftar Produk Terhapus (Trash)",
+                "operationId": "fbda3df9431c691b425b275cff8de8dc",
+                "responses": {
+                    "200": {
+                        "description": "Daftar produk terhapus"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/products/{product}/restore": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Pulihkan Produk Terhapus",
+                "operationId": "4a6430d0a7e4e349594d093f7c9bc2ba",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "ULID produk",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produk berhasil dipulihkan"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/products/{product}/force": {
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Hapus Permanen Produk Digital",
+                "operationId": "1525c25b1b053fdffc6b1b8ff0205f23",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "ULID produk",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produk dihapus permanen dari basis data"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Masukkan Bearer token Sanctum untuk otentikasi API",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Health",
+            "description": "API Health Check Endpoint"
+        },
+        {
+            "name": "Products",
+            "description": "Pengelolaan Katalog Produk Digital (CRUD & Operations)"
+        }
+    ]
+}

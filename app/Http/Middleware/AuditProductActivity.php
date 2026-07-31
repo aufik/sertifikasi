@@ -123,7 +123,7 @@ final class AuditProductActivity
             return $routeProduct->toArray();
         }
 
-        if (is_string($routeProduct) || is_int($routeProduct)) {
+        if (is_scalar($routeProduct)) {
             $found = Product::withTrashed()->whereKey((string) $routeProduct)->first();
 
             return $found?->toArray();
@@ -161,7 +161,7 @@ final class AuditProductActivity
             return $fresh?->toArray() ?? $routeProduct->toArray();
         }
 
-        if (is_string($routeProduct) || is_int($routeProduct)) {
+        if (is_scalar($routeProduct)) {
             $found = Product::withTrashed()->whereKey((string) $routeProduct)->first();
 
             return $found?->toArray() ?? $productBefore;

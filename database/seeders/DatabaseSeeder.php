@@ -75,7 +75,7 @@ final class DatabaseSeeder extends Seeder
                         'old_stock' => $product->stock - 10,
                         'added_stock' => 10,
                         'new_stock' => $product->stock,
-                        'reason' => 'Stok masuk dari supplier utama',
+                        'reason' => 'Top-up kuota / aktivasi lisensi digital dari vendor',
                     ],
                     'request_id' => $restockReqId,
                     'ip_address' => $ip,

@@ -13,99 +13,216 @@ final class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Buat Kategori/Genre Buku Perpustakaan secara eksplisit
-        $genres = [
-            ['name' => 'Novel & Fiksi Sastra', 'type' => 'physical'],
-            ['name' => 'Sains & Teknologi', 'type' => 'physical'],
-            ['name' => 'Sejarah & Biografi', 'type' => 'physical'],
-            ['name' => 'Buku Pelajaran & Edukasi', 'type' => 'physical'],
-            ['name' => 'Ensiklopedia & Referensi', 'type' => 'physical'],
-            ['name' => 'Komik & Novel Grafis', 'type' => 'physical'],
-            ['name' => 'Pengembangan Diri & Karir', 'type' => 'physical'],
-            ['name' => 'E-Book & Jurnal Ilmiah', 'type' => 'digital'],
-            ['name' => 'Buku Audio (Audiobook)', 'type' => 'service'],
-            ['name' => 'Majalah & Publikasi Berkala', 'type' => 'physical'],
+        // Kategori produk digital untuk perusahaan digital (Product Management Service).
+        $categories = [
+            ['name' => 'Software License', 'type' => 'digital'],
+            ['name' => 'SaaS Subscription', 'type' => 'digital'],
+            ['name' => 'Cloud Service', 'type' => 'service'],
+            ['name' => 'Mobile App', 'type' => 'digital'],
+            ['name' => 'API & Integration', 'type' => 'digital'],
+            ['name' => 'Digital Template', 'type' => 'digital'],
+            ['name' => 'Online Course', 'type' => 'digital'],
+            ['name' => 'Media Asset', 'type' => 'digital'],
+            ['name' => 'Support Package', 'type' => 'service'],
+            ['name' => 'Hardware Bundle', 'type' => 'physical'],
         ];
 
         $createdCategories = [];
-        foreach ($genres as $genre) {
+        foreach ($categories as $item) {
             $createdCategories[] = Category::firstOrCreate(
-                ['name' => $genre['name']],
+                ['name' => $item['name']],
                 [
-                    'slug' => Str::slug($genre['name']) . '-' . rand(100, 999),
-                    'type' => $genre['type'],
+                    'slug' => Str::slug($item['name']).'-'.random_int(100, 999),
+                    'type' => $item['type'],
                     'is_active' => true,
                 ]
             );
         }
 
-        // 2. Buat Buku Spesifik yang Sangat Realistis
-        $booksData = [
+        // Produk digital spesifik & realistis untuk demo internal.
+        $catalog = [
             [
-                'category_name' => 'Novel & Fiksi Sastra',
-                'books' => [
-                    ['name' => 'Laskar Pelangi', 'sku' => 'SKU-ISBN-9789791227032', 'desc' => 'Novel inspiratif tentang perjuangan sepuluh anak Belitung dalam menuntut ilmu di SD Muhammadiyah.'],
-                    ['name' => 'Bumi Manusia', 'sku' => 'SKU-ISBN-9789799731234', 'desc' => 'Mahakarya Pramoedya Ananta Toer yang mengisahkan perjuangan Minke di masa kolonial Belanda.'],
-                    ['name' => 'Cantik itu Luka', 'sku' => 'SKU-ISBN-9786020312543', 'desc' => 'Novel realisme magis karya Eka Kurniawan yang menceritakan tragedi sejarah melalui kehidupan Dewi Ayu.'],
-                    ['name' => 'Ronggeng Dukuh Paruk', 'sku' => 'SKU-ISBN-9789792201904', 'desc' => 'Kisah tragis penari ronggeng Srintil berlatar dukuh kecil yang terisolasi di Jawa Tengah.'],
+                'category_name' => 'Software License',
+                'products' => [
+                    [
+                        'name' => 'NovaDesk Pro License',
+                        'sku' => 'SKU-DIG-NDP-001',
+                        'desc' => 'Lisensi perpetual untuk suite produktivitas desktop multi-platform.',
+                        'price' => 2499000,
+                        'stock' => 120,
+                    ],
+                    [
+                        'name' => 'SecureVault Enterprise Key',
+                        'sku' => 'SKU-DIG-SVE-002',
+                        'desc' => 'Lisensi enkripsi file enterprise dengan manajemen kunci terpusat.',
+                        'price' => 4599000,
+                        'stock' => 80,
+                    ],
+                    [
+                        'name' => 'PixelCraft Studio SE',
+                        'sku' => 'SKU-DIG-PCS-003',
+                        'desc' => 'Software desain grafis profesional untuk tim kreatif digital.',
+                        'price' => 1899000,
+                        'stock' => 200,
+                    ],
                 ],
             ],
             [
-                'category_name' => 'Sains & Teknologi',
-                'books' => [
-                    ['name' => 'Pengantar Kecerdasan Buatan', 'sku' => 'SKU-ISBN-9786020456123', 'desc' => 'Buku panduan dasar mengenai machine learning, neural networks, dan algoritma AI modern.'],
-                    ['name' => 'Belajar Pemrograman PHP 8.4 & Laravel 12', 'sku' => 'SKU-ISBN-9786020299881', 'desc' => 'Panduan komprehensif membangun aplikasi web skala enterprise menggunakan Laravel.'],
-                    ['name' => 'Fisika Quantum untuk Pemula', 'sku' => 'SKU-ISBN-9786020512345', 'desc' => 'Penjelasan konsep mekanika kuantum, teori relativitas, dan partikel elementer secara populer.'],
+                'category_name' => 'SaaS Subscription',
+                'products' => [
+                    [
+                        'name' => 'FlowCRM Cloud Monthly',
+                        'sku' => 'SKU-DIG-FCM-010',
+                        'desc' => 'Langganan bulanan CRM cloud untuk sales pipeline dan customer care.',
+                        'price' => 499000,
+                        'stock' => 999,
+                    ],
+                    [
+                        'name' => 'InsightBoard Analytics Annual',
+                        'sku' => 'SKU-DIG-IBA-011',
+                        'desc' => 'Dashboard analytics tahunan dengan konektor data multi-sumber.',
+                        'price' => 8999000,
+                        'stock' => 500,
+                    ],
+                    [
+                        'name' => 'CollabSpace Team Plan',
+                        'sku' => 'SKU-DIG-CST-012',
+                        'desc' => 'Workspace kolaborasi dokumen, chat, dan task board untuk 25 user.',
+                        'price' => 1299000,
+                        'stock' => 750,
+                    ],
                 ],
             ],
             [
-                'category_name' => 'Sejarah & Biografi',
-                'books' => [
-                    ['name' => 'Api Sejarah', 'sku' => 'SKU-ISBN-9786029512311', 'desc' => 'Kajian sejarah perjuangan umat Islam dan ulama dalam mempertahankan NKRI.'],
-                    ['name' => 'Soekarno: Biografi Lengkap Negarawan Sejati', 'sku' => 'SKU-ISBN-9786020223121', 'desc' => 'Perjalanan hidup proklamator bangsa Indonesia sejak masa kecil hingga kepemimpinannya.'],
+                'category_name' => 'Cloud Service',
+                'products' => [
+                    [
+                        'name' => 'ObjectStore 1TB Plan',
+                        'sku' => 'SKU-DIG-OS1-020',
+                        'desc' => 'Penyimpanan objek cloud 1TB dengan redundancy multi-region.',
+                        'price' => 350000,
+                        'stock' => 1000,
+                    ],
+                    [
+                        'name' => 'EdgeCDN Starter',
+                        'sku' => 'SKU-DIG-CDN-021',
+                        'desc' => 'Paket CDN edge untuk distribusi konten digital global.',
+                        'price' => 750000,
+                        'stock' => 600,
+                    ],
                 ],
             ],
             [
-                'category_name' => 'Ensiklopedia & Referensi',
-                'books' => [
-                    ['name' => 'Kamus Besar Bahasa Indonesia (Edisi V)', 'sku' => 'SKU-ISBN-9789794071823', 'desc' => 'Referensi utama ejaan dan makna kata baku bahasa Indonesia terlengkap.'],
-                    ['name' => 'Ensiklopedia Geografi Dunia', 'sku' => 'SKU-ISBN-9786020351221', 'desc' => 'Kumpulan peta, fakta iklim, serta kebudayaan dari berbagai negara di penjuru dunia.'],
+                'category_name' => 'Mobile App',
+                'products' => [
+                    [
+                        'name' => 'PayLite Merchant App',
+                        'sku' => 'SKU-DIG-PLM-030',
+                        'desc' => 'Aplikasi merchant untuk penerimaan pembayaran digital QRIS & e-wallet.',
+                        'price' => 299000,
+                        'stock' => 1500,
+                    ],
+                    [
+                        'name' => 'FieldTrack Ops Mobile',
+                        'sku' => 'SKU-DIG-FTO-031',
+                        'desc' => 'Aplikasi mobile tracking operasional lapangan real-time.',
+                        'price' => 899000,
+                        'stock' => 400,
+                    ],
+                ],
+            ],
+            [
+                'category_name' => 'API & Integration',
+                'products' => [
+                    [
+                        'name' => 'Payment Gateway API Pack',
+                        'sku' => 'SKU-DIG-PGA-040',
+                        'desc' => 'Paket kuota API gateway pembayaran untuk 100.000 transaksi/bulan.',
+                        'price' => 1500000,
+                        'stock' => 300,
+                    ],
+                    [
+                        'name' => 'WhatsApp Business Connector',
+                        'sku' => 'SKU-DIG-WBC-041',
+                        'desc' => 'Integrasi API WhatsApp Business untuk notifikasi dan CS otomatis.',
+                        'price' => 2200000,
+                        'stock' => 250,
+                    ],
+                ],
+            ],
+            [
+                'category_name' => 'Online Course',
+                'products' => [
+                    [
+                        'name' => 'Laravel API Masterclass',
+                        'sku' => 'SKU-DIG-LAM-050',
+                        'desc' => 'Kursus online membangun REST API production-ready dengan Laravel.',
+                        'price' => 549000,
+                        'stock' => 2000,
+                    ],
+                    [
+                        'name' => 'Product Ops for Digital Teams',
+                        'sku' => 'SKU-DIG-POD-051',
+                        'desc' => 'Pelatihan digital product operations, backlog, dan release management.',
+                        'price' => 799000,
+                        'stock' => 1200,
+                    ],
+                ],
+            ],
+            [
+                'category_name' => 'Support Package',
+                'products' => [
+                    [
+                        'name' => 'Premium Support 24/7',
+                        'sku' => 'SKU-DIG-PS7-060',
+                        'desc' => 'Paket layanan dukungan teknis premium dengan SLA 24/7.',
+                        'price' => 3500000,
+                        'stock' => 100,
+                    ],
+                    [
+                        'name' => 'Onboarding Implementation Pack',
+                        'sku' => 'SKU-DIG-OIP-061',
+                        'desc' => 'Layanan onboarding implementasi modul Product Management Service.',
+                        'price' => 5000000,
+                        'stock' => 50,
+                    ],
                 ],
             ],
         ];
 
-        // Seed buku spesifik
-        foreach ($booksData as $group) {
+        foreach ($catalog as $group) {
             $category = collect($createdCategories)->firstWhere('name', $group['category_name']);
             if (! $category) {
                 continue;
             }
 
-            foreach ($group['books'] as $book) {
+            foreach ($group['products'] as $item) {
                 Product::firstOrCreate(
-                    ['sku' => $book['sku']],
+                    ['sku' => $item['sku']],
                     [
                         'category_id' => $category->id,
-                        'name' => $book['name'],
-                        'description' => $book['desc'] . ' Buku ini sangat direkomendasikan untuk koleksi perpustakaan.',
-                        'price' => rand(45000, 150000),
-                        'stock' => rand(5, 30),
+                        'name' => $item['name'],
+                        'description' => $item['desc'],
+                        'price' => $item['price'],
+                        'stock' => $item['stock'],
                         'status' => 'active',
                         'metadata' => [
-                            'author' => fake()->name(),
-                            'publisher' => fake()->company(),
-                            'year' => rand(1995, 2026),
-                            'source' => 'library_seeder',
+                            'vendor' => 'Digital Internal Catalog',
+                            'delivery' => 'digital_download_or_activation',
+                            'billing_model' => str_contains(strtolower($item['name']), 'monthly') || str_contains(strtolower($item['name']), 'annual')
+                                ? 'subscription'
+                                : 'one_time',
+                            'source' => 'digital_seeder',
                         ],
                     ]
                 );
             }
         }
 
-        // 3. Gunakan Factory untuk melengkapi total data buku hingga total 150 buku
+        // Lengkapi volume data untuk demo search, pagination, dan dashboard.
         foreach ($createdCategories as $category) {
             Product::factory()
-                ->count(15) // 15 buku per kategori
+                ->count(12)
                 ->create([
                     'category_id' => $category->id,
                 ]);
