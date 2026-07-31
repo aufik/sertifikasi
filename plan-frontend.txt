@@ -1,0 +1,533 @@
+# Enterprise Frontend Roadmap: Product Management UI (Laravel Inertia React)
+
+## Status Legend
+- 🟥 [ ] Not Started
+- 🟧 [/] In Progress
+- 🟩 [x] Completed
+
+---
+
+## 🎯 Frontend Objective
+Build a professional, maintainable, and production-ready admin frontend for the **Product Management Service** using:
+
+- **Laravel 12** as the full-stack application shell
+- **Inertia.js** as the server-driven SPA bridge
+- **React 19+** for UI components
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **Vite** for frontend bundling
+
+The frontend must integrate cleanly with the existing backend architecture while keeping UI logic, page state, API interaction, and component structure organized and scalable.
+
+> Important: This document is a frontend implementation plan only. Do not execute implementation until explicitly instructed.
+
+---
+
+# 🗺️ Frontend Roadmap & Execution Phases
+
+## Phase 1: Frontend Foundation & Tooling
+- 🟥 [ ] 1.1 Install Inertia Laravel adapter and React adapter
+- 🟥 [ ] 1.2 Install React, React DOM, TypeScript, Vite React plugin
+- 🟥 [ ] 1.3 Configure TypeScript (`tsconfig.json`) with strict mode
+- 🟥 [ ] 1.4 Configure Vite for Laravel + React + Inertia
+- 🟥 [ ] 1.5 Configure Tailwind CSS and PostCSS
+- 🟥 [ ] 1.6 Add frontend linting and formatting tools
+  - ESLint
+  - Prettier
+  - TypeScript-aware linting
+- 🟥 [ ] 1.7 Configure path aliases for clean imports
+  - `@/Components`
+  - `@/Layouts`
+  - `@/Pages`
+  - `@/Hooks`
+  - `@/Types`
+  - `@/Lib`
+
+---
+
+## Phase 2: Inertia Application Shell
+- 🟥 [ ] 2.1 Create root Inertia app entrypoint
+  - `resources/js/app.tsx`
+- 🟥 [ ] 2.2 Create server-side Inertia middleware
+  - Shared authenticated user
+  - Flash messages
+  - Validation errors
+  - Request ID
+  - App metadata
+- 🟥 [ ] 2.3 Configure root Blade template
+  - `resources/views/app.blade.php`
+- 🟥 [ ] 2.4 Configure page title strategy
+- 🟥 [ ] 2.5 Configure loading indicator and progress bar
+- 🟥 [ ] 2.6 Configure global error boundary for React rendering failures
+
+---
+
+## Phase 3: Frontend Architecture & Directory Structure
+- 🟥 [ ] 3.1 Create enterprise frontend directory structure
+- 🟥 [ ] 3.2 Define reusable layout system
+- 🟥 [ ] 3.3 Define UI component conventions
+- 🟥 [ ] 3.4 Define frontend type contracts matching backend resources
+- 🟥 [ ] 3.5 Define frontend form handling conventions
+- 🟥 [ ] 3.6 Define route helper conventions
+- 🟥 [ ] 3.7 Define notification/toast strategy
+
+### Recommended Directory Structure
+
+```txt
+resources/
+├── css/
+│   └── app.css
+├── js/
+│   ├── app.tsx
+│   ├── bootstrap.ts
+│   ├── Components/
+│   │   ├── Common/
+│   │   │   ├── EmptyState.tsx
+│   │   │   ├── ErrorState.tsx
+│   │   │   ├── LoadingState.tsx
+│   │   │   └── PageHeader.tsx
+│   │   ├── DataDisplay/
+│   │   │   ├── DataTable.tsx
+│   │   │   ├── Pagination.tsx
+│   │   │   └── StatusBadge.tsx
+│   │   ├── Feedback/
+│   │   │   ├── ConfirmDialog.tsx
+│   │   │   ├── ToastProvider.tsx
+│   │   │   └── ValidationMessage.tsx
+│   │   ├── Form/
+│   │   │   ├── Button.tsx
+│   │   │   ├── Checkbox.tsx
+│   │   │   ├── Input.tsx
+│   │   │   ├── Select.tsx
+│   │   │   └── Textarea.tsx
+│   │   └── Navigation/
+│   │       ├── Breadcrumbs.tsx
+│   │       ├── Sidebar.tsx
+│   │       └── Topbar.tsx
+│   ├── Hooks/
+│   │   ├── useDebounce.ts
+│   │   ├── useFlashToast.ts
+│   │   ├── usePermission.ts
+│   │   └── useQueryParams.ts
+│   ├── Layouts/
+│   │   ├── AppLayout.tsx
+│   │   ├── AuthLayout.tsx
+│   │   └── GuestLayout.tsx
+│   ├── Lib/
+│   │   ├── cn.ts
+│   │   ├── formatCurrency.ts
+│   │   ├── formatDate.ts
+│   │   └── route.ts
+│   ├── Pages/
+│   │   ├── Auth/
+│   │   │   ├── Login.tsx
+│   │   │   └── ForgotPassword.tsx
+│   │   ├── Dashboard/
+│   │   │   └── Index.tsx
+│   │   ├── Products/
+│   │   │   ├── Index.tsx
+│   │   │   ├── Create.tsx
+│   │   │   ├── Edit.tsx
+│   │   │   ├── Show.tsx
+│   │   │   └── Partials/
+│   │   │       ├── ProductFilters.tsx
+│   │   │       ├── ProductForm.tsx
+│   │   │       └── ProductTable.tsx
+│   │   └── Errors/
+│   │       ├── NotFound.tsx
+│   │       └── ServerError.tsx
+│   └── Types/
+│       ├── auth.ts
+│       ├── category.ts
+│       ├── global.d.ts
+│       ├── inertia.ts
+│       ├── pagination.ts
+│       └── product.ts
+└── views/
+    └── app.blade.php
+```
+
+---
+
+## Phase 4: Design System & UI Standards
+- 🟥 [ ] 4.1 Define visual identity
+  - Neutral enterprise dashboard style
+  - Clean spacing
+  - Clear typography hierarchy
+  - High contrast and accessible states
+- 🟥 [ ] 4.2 Create base UI primitives
+  - Button
+  - Input
+  - Select
+  - Textarea
+  - Checkbox
+  - Badge
+  - Modal/Dialog
+  - Card
+  - Table
+- 🟥 [ ] 4.3 Define component variants
+  - Primary
+  - Secondary
+  - Danger
+  - Ghost
+  - Disabled
+  - Loading
+- 🟥 [ ] 4.4 Define responsive behavior
+  - Desktop-first admin layout
+  - Tablet-friendly table controls
+  - Mobile fallback for forms and product detail
+- 🟥 [ ] 4.5 Define accessibility standards
+  - Keyboard navigation
+  - Proper labels
+  - Focus rings
+  - ARIA for dialogs and loading states
+
+---
+
+## Phase 5: Authentication UI
+- 🟥 [ ] 5.1 Login page
+- 🟥 [ ] 5.2 Forgot password page if backend supports it
+- 🟥 [ ] 5.3 Authenticated app layout
+- 🟥 [ ] 5.4 Guest layout
+- 🟥 [ ] 5.5 Logout flow
+- 🟥 [ ] 5.6 Display current authenticated user
+- 🟥 [ ] 5.7 Role-aware UI visibility
+  - Admin actions
+  - Manager actions
+  - Viewer-only restrictions
+
+---
+
+## Phase 6: Dashboard Page
+- 🟥 [ ] 6.1 Build admin dashboard shell
+- 🟥 [ ] 6.2 Display product summary cards
+  - Total products
+  - Active products
+  - Draft products
+  - Archived products
+  - Low stock products
+- 🟥 [ ] 6.3 Display recent product changes if audit data is available
+- 🟥 [ ] 6.4 Display system health indicator
+- 🟥 [ ] 6.5 Prepare dashboard for future chart components
+
+---
+
+## Phase 7: Product Management UI
+- 🟥 [ ] 7.1 Product index/list page
+- 🟥 [ ] 7.2 Product data table
+  - Name
+  - SKU
+  - Category
+  - Status
+  - Price
+  - Stock
+  - Created date
+  - Row actions
+- 🟥 [ ] 7.3 Server-side pagination integration
+- 🟥 [ ] 7.4 Search input with debounce
+- 🟥 [ ] 7.5 Filter controls
+  - Status
+  - Category
+  - Stock availability
+- 🟥 [ ] 7.6 Product create page
+- 🟥 [ ] 7.7 Product edit page
+- 🟥 [ ] 7.8 Product detail page
+- 🟥 [ ] 7.9 Delete confirmation dialog
+- 🟥 [ ] 7.10 Restore deleted product flow
+- 🟥 [ ] 7.11 Permanent purge flow for admin role only
+- 🟥 [ ] 7.12 Empty, loading, and error states
+
+---
+
+## Phase 8: Form Handling Strategy
+- 🟥 [ ] 8.1 Use Inertia `useForm` for create/update flows
+- 🟥 [ ] 8.2 Preserve form state during validation errors
+- 🟥 [ ] 8.3 Display backend validation errors per field
+- 🟥 [ ] 8.4 Disable submit button while processing
+- 🟥 [ ] 8.5 Add optimistic UX feedback only where safe
+- 🟥 [ ] 8.6 Normalize money inputs for Indonesian Rupiah display
+- 🟥 [ ] 8.7 Keep payload names aligned with backend DTO/FormRequest fields
+
+### Product Form Fields
+
+```txt
+category_id   required select
+name          required text
+sku           required text
+description   required textarea
+price         required integer / currency input
+stock         required integer
+status        required select: draft | active | archived
+```
+
+---
+
+## Phase 9: Frontend Types & Contracts
+- 🟥 [ ] 9.1 Define shared `User` type
+- 🟥 [ ] 9.2 Define shared `Product` type
+- 🟥 [ ] 9.3 Define shared `Category` type
+- 🟥 [ ] 9.4 Define shared `PaginationMeta` type
+- 🟥 [ ] 9.5 Define shared Inertia page props type
+- 🟥 [ ] 9.6 Keep frontend resource fields aligned with backend `ProductResource`
+
+### Core Type Contracts
+
+```ts
+export type ProductStatus = 'draft' | 'active' | 'archived';
+
+export interface Product {
+  id: string;
+  category_id: string;
+  name: string;
+  sku: string;
+  description: string;
+  price: number;
+  stock: number;
+  status: ProductStatus;
+  created_at: string | null;
+  updated_at: string | null;
+}
+
+export interface PaginationMeta {
+  current_page: number;
+  per_page: number;
+  last_page: number;
+  total: number;
+  has_more: boolean;
+}
+```
+
+---
+
+## Phase 10: Routing Strategy
+- 🟥 [ ] 10.1 Add web routes for Inertia pages
+- 🟥 [ ] 10.2 Keep API routes for JSON API usage
+- 🟥 [ ] 10.3 Use named routes consistently
+- 🟥 [ ] 10.4 Add middleware groups
+  - `auth`
+  - `verified` if email verification is enabled
+  - role middleware if needed
+- 🟥 [ ] 10.5 Recommended route names:
+  - `dashboard`
+  - `products.index`
+  - `products.create`
+  - `products.store`
+  - `products.show`
+  - `products.edit`
+  - `products.update`
+  - `products.destroy`
+  - `products.restore`
+  - `products.purge`
+
+---
+
+## Phase 11: UX, State & Feedback
+- 🟥 [ ] 11.1 Global flash message toast system
+- 🟥 [ ] 11.2 Confirmation dialog for destructive actions
+- 🟥 [ ] 11.3 Loading indicator for page transitions
+- 🟥 [ ] 11.4 Inline loading state for buttons and forms
+- 🟥 [ ] 11.5 Empty state for product list
+- 🟥 [ ] 11.6 Error state for failed server requests
+- 🟥 [ ] 11.7 Preserve filters and pagination in URL query parameters
+- 🟥 [ ] 11.8 Use debounce for search to reduce server requests
+
+---
+
+## Phase 12: Testing Strategy
+- 🟥 [ ] 12.1 Backend feature tests for Inertia pages
+  - Assert pages render correct Inertia components
+  - Assert auth protection
+  - Assert role protection
+- 🟥 [ ] 12.2 Frontend component tests if test stack is added
+  - Vitest
+  - React Testing Library
+- 🟥 [ ] 12.3 Browser/e2e tests if required
+  - Laravel Dusk or Playwright
+- 🟥 [ ] 12.4 Test critical flows
+  - Login
+  - Product list
+  - Product creation
+  - Product update
+  - Product deletion
+  - Validation error display
+  - Filter/search behavior
+
+---
+
+## Phase 13: Performance & Production Optimization
+- 🟥 [ ] 13.1 Vite production build validation
+- 🟥 [ ] 13.2 Code splitting for large pages if needed
+- 🟥 [ ] 13.3 Avoid over-fetching page props
+- 🟥 [ ] 13.4 Use server-side pagination for large product lists
+- 🟥 [ ] 13.5 Cache category dropdown options where safe
+- 🟥 [ ] 13.6 Optimize table rendering for large lists
+- 🟥 [ ] 13.7 Ensure assets are versioned and built for deployment
+
+---
+
+## Phase 14: Documentation & Handoff
+- 🟥 [ ] 14.1 Document frontend architecture
+- 🟥 [ ] 14.2 Document component conventions
+- 🟥 [ ] 14.3 Document route/page map
+- 🟥 [ ] 14.4 Document local development commands
+- 🟥 [ ] 14.5 Document production build commands
+
+---
+
+# 🧱 Recommended Frontend Architecture Principles
+
+## 1. Pages Should Be Thin
+Inertia pages should coordinate data and layout only. Complex UI should be extracted into partials/components.
+
+Bad:
+```tsx
+// Huge Products/Index.tsx with table, filters, dialogs, and form logic all inline.
+```
+
+Good:
+```tsx
+<ProductsIndexPage>
+  <ProductFilters />
+  <ProductTable />
+  <Pagination />
+</ProductsIndexPage>
+```
+
+---
+
+## 2. Keep UI Components Reusable but Not Over-Abstracted
+Create reusable primitives for common elements, but do not over-engineer components before repeated usage exists.
+
+Recommended reusable components:
+- `Button`
+- `Input`
+- `Select`
+- `Textarea`
+- `DataTable`
+- `Pagination`
+- `StatusBadge`
+- `ConfirmDialog`
+- `PageHeader`
+
+---
+
+## 3. Server-Driven Pages, Not Client-Side API Duplication
+Because this stack uses Inertia, prefer returning page props from Laravel controllers instead of duplicating all page fetches with client-side `fetch` or Axios.
+
+Use client-side requests only for:
+- Small async interactions
+- Autocomplete
+- Background refresh
+- Future real-time features
+
+---
+
+## 4. URL Is the Source of Truth for List Filters
+For product lists, search/filter/sort/pagination state should live in the query string.
+
+Example:
+```txt
+/products?search=laptop&status=active&page=2&per_page=15
+```
+
+Benefits:
+- Shareable URLs
+- Browser back/forward works correctly
+- Filters persist after refresh
+
+---
+
+## 5. Strong Type Alignment With Backend Resources
+Frontend TypeScript types must follow backend API/Inertia resource output, especially:
+- `ProductResource`
+- `CategoryResource`
+- Pagination metadata
+- Authenticated user props
+- Flash messages
+- Validation errors
+
+---
+
+# 📦 Recommended Packages
+
+## Core
+```bash
+composer require inertiajs/inertia-laravel
+npm install @inertiajs/react react react-dom
+npm install -D @vitejs/plugin-react typescript
+```
+
+## Styling
+```bash
+npm install -D tailwindcss postcss autoprefixer
+```
+
+## UI Utilities
+```bash
+npm install clsx tailwind-merge lucide-react
+```
+
+## Optional but Recommended
+```bash
+npm install sonner
+npm install date-fns
+```
+
+## Quality Tools
+```bash
+npm install -D eslint prettier eslint-config-prettier eslint-plugin-react-hooks @typescript-eslint/parser @typescript-eslint/eslint-plugin
+```
+
+## Optional Testing Tools
+```bash
+npm install -D vitest @testing-library/react @testing-library/jest-dom jsdom
+```
+
+---
+
+# 🧪 Frontend Quality Gates
+Before considering frontend implementation complete, run:
+
+```bash
+npm run build
+npm run lint
+php artisan test
+```
+
+If Vitest is added:
+
+```bash
+npm run test
+```
+
+Expected final status:
+
+```txt
+TypeScript: PASS
+ESLint: PASS
+Vite Build: PASS
+PHP/Inertia Feature Tests: PASS
+```
+
+---
+
+# ✅ Definition of Done
+Frontend implementation is considered complete only when:
+
+1. Inertia React app renders successfully.
+2. Auth pages and protected app layout work.
+3. Product list/create/edit/show/delete flows work.
+4. Search, filters, pagination, and validation errors work correctly.
+5. Role-aware UI restrictions are applied.
+6. UI is responsive and accessible.
+7. `npm run build` passes.
+8. `php artisan test` passes.
+9. Code follows the agreed directory structure.
+10. No placeholder components or unfinished TODO logic remain.
+
+---
+
+# 🚫 Implementation Boundaries
+Do not implement frontend until explicitly instructed.
+
+When implementation begins, execute phase by phase and validate each stage before moving forward.

@@ -1,0 +1,374 @@
+# Next Implementation Plan: Backend Hardening, API Tests, and Inertia React Frontend
+
+## Scope Boundary
+- Do not initialize Git.
+- Focus only on backend, frontend, API tests, and documentation required by DIT.
+- Execute backend hardening before frontend implementation.
+
+---
+
+## Phase 1: Backend Completion & Hardening
+
+### 1.1 Review Backend Existing Implementation
+- Validate API routes.
+- Validate standardized API response format.
+- Validate middleware:
+  - `AssignRequestId`
+  - `MonitorApiPerformance`
+- Validate `ProductService`.
+- Validate `ProductRepository`.
+- Validate `ProductResource`.
+- Validate migrations and factories.
+- Validate logging to `product_log`.
+- Validate exception handler API behavior.
+
+Output:
+- `docs/backend-review-checklist.md`
+
+### 1.2 Complete API Behavior
+- Search by product name.
+- Search by SKU.
+- Filter by status.
+- Filter by category.
+- Add safe pagination limit.
+- Add sorting support:
+  - latest
+  - name ascending/descending
+  - price ascending/descending
+  - stock ascending/descending
+- Validate duplicate SKU, invalid category, invalid status, negative price, and negative stock.
+
+Output:
+- Updated `ProductFilterDTO`
+- Updated `ProductRepository`
+- API tests for validation/search/sort/pagination
+
+### 1.3 Strengthen Authorization
+
+Role matrix:
+
+| Role | View | Create | Update | Soft Delete | Restore | Purge |
+|---|---:|---:|---:|---:|---:|---:|
+| Admin | Yes | Yes | Yes | Yes | Yes | Yes |
+| Manager | Yes | Yes | Yes | No | No | No |
+| Viewer | Yes | No | No | No | No | No |
+
+Tasks:
+- Apply policy checks in product API controller.
+- Ensure unauthorized responses use standardized JSON 403.
+- Add authorization tests.
+
+Output:
+- Updated `ProductController`
+- Updated tests
+
+### 1.4 Strengthen Audit Logging
+- Product created creates audit record.
+- Product updated creates audit record.
+- Product deleted creates audit record.
+- Request ID is recorded where available.
+- Operation log is written to `product_log`.
+
+Output:
+- Audit tests
+
+### 1.5 Strengthen Monitoring
+- All API responses contain `X-Request-ID`.
+- All API responses contain `X-Response-Time-Ms`.
+- Health endpoint structure is tested.
+- Slow request logging is documented.
+
+Output:
+- Monitoring tests
+
+---
+
+## Phase 2: Backend Unit & API Test Suite
+
+### 2.1 DTO Unit Tests
+- `CreateProductDTO::toArray()`
+- `UpdateProductDTO::toArray()`
+- `ProductFilterDTO::fromArray()`
+- Enum serialization
+- Null update filtering
+
+### 2.2 Service Tests
+- `ProductService::create()`
+- `ProductService::update()`
+- `ProductService::delete()`
+- `ProductService::restore()`
+- `ProductService::purge()`
+- Event dispatching
+- Cache/log behavior where practical
+
+### 2.3 Repository Tests
+- Search by name
+- Search by SKU
+- Filter by status
+- Filter by category
+- Sort and pagination
+- `findWithLock()`
+
+### 2.4 API CRUD Tests
+- Guest cannot access products
+- Authenticated user can list products
+- Authenticated admin can create product
+- Authenticated user can view detail
+- Authenticated admin/manager can update product
+- Admin can soft delete product
+- Admin can restore product
+- Admin can purge product
+
+### 2.5 API Validation Tests
+- Missing fields returns 422
+- Duplicate SKU returns 422
+- Invalid category returns 422
+- Invalid status returns 422
+- Negative price returns 422
+- Negative stock returns 422
+- Response uses standardized `meta` and `errors`
+
+### 2.6 API Search Tests
+- Search by product name
+- Search by SKU
+- Filter by active status
+- Filter by draft status
+- Filter by category
+- Pagination metadata exists
+- Empty result returns success response with empty data
+
+### 2.7 API Authorization Tests
+- Admin can create/update/delete/restore/purge
+- Manager can create/update but cannot delete/purge
+- Viewer can list/show but cannot create/update/delete
+- Guest returns 401
+- Unauthorized role returns 403
+
+### 2.8 API Error Handling Tests
+- Non-existing product returns standardized 404
+- Unauthenticated request returns standardized 401
+- Unauthorized request returns standardized 403
+- Validation returns standardized 422
+- Error responses contain request ID and timestamp
+
+### 2.9 API Logging and Monitoring Tests
+- API response contains `X-Request-ID`
+- API response contains `X-Response-Time-Ms`
+- Product operation creates audit record
+- Health endpoint response is valid
+
+---
+
+## Phase 3: Frontend Foundation - Laravel Inertia React
+
+### 3.1 Install Frontend Stack
+Composer:
+- `inertiajs/inertia-laravel`
+
+NPM:
+- `@inertiajs/react`
+- `react`
+- `react-dom`
+- `@vitejs/plugin-react`
+- `typescript`
+- `tailwindcss`
+- `postcss`
+- `autoprefixer`
+- `clsx`
+- `tailwind-merge`
+- `lucide-react`
+- `sonner`
+- `date-fns`
+
+Quality tools:
+- ESLint
+- Prettier
+- TypeScript ESLint
+
+### 3.2 Configure Inertia App Shell
+Files:
+- `resources/js/app.tsx`
+- `resources/js/bootstrap.ts`
+- `resources/views/app.blade.php`
+- `app/Http/Middleware/HandleInertiaRequests.php`
+
+Shared props:
+- auth user
+- role
+- flash messages
+- validation errors
+- request ID
+- app name
+
+### 3.3 Configure TypeScript
+- `tsconfig.json`
+- `resources/js/Types/global.d.ts`
+- `resources/js/Types/inertia.ts`
+- strict mode
+- `@/*` alias
+
+### 3.4 Configure Vite
+- Laravel Vite plugin
+- React plugin
+- alias `@`
+- successful production build
+
+### 3.5 Configure Tailwind
+- enterprise dashboard theme
+- accessible colors
+- form states
+- table styles
+- responsive layout support
+
+---
+
+## Phase 4: Frontend Architecture & Components
+
+### 4.1 Directory Structure
+Create:
+- `resources/js/Components`
+- `resources/js/Hooks`
+- `resources/js/Layouts`
+- `resources/js/Lib`
+- `resources/js/Pages`
+- `resources/js/Types`
+
+### 4.2 Reusable UI Components
+- Button
+- Input
+- Select
+- Textarea
+- Card
+- Badge
+- DataTable
+- Pagination
+- ConfirmDialog
+- ToastProvider
+- PageHeader
+- LoadingState
+- EmptyState
+- ErrorState
+
+### 4.3 Utilities
+- `cn.ts`
+- `formatCurrency.ts`
+- `formatDate.ts`
+- `route.ts`
+
+### 4.4 Hooks
+- `useDebounce.ts`
+- `useFlashToast.ts`
+- `usePermission.ts`
+- `useQueryParams.ts`
+
+---
+
+## Phase 5: Frontend Pages
+
+### 5.1 Auth Pages
+- Login page
+- Logout flow
+- Guest layout
+- Validation error display
+
+### 5.2 Dashboard Page
+- Total products
+- Active products
+- Draft products
+- Archived products
+- Low stock count
+- Simple health status
+
+### 5.3 Product Pages
+- Product index
+- Product create
+- Product edit
+- Product show
+- Product filters
+- Product form
+- Product table
+- Search debounce
+- Pagination
+- Delete confirmation
+- Restore and purge flows
+- Role-aware UI actions
+
+---
+
+## Phase 6: Frontend Routes & Controllers
+
+### Web Routes
+- `dashboard`
+- `products.index`
+- `products.create`
+- `products.store`
+- `products.show`
+- `products.edit`
+- `products.update`
+- `products.destroy`
+- `products.restore`
+- `products.purge`
+
+### Inertia Controllers
+- `DashboardController`
+- `ProductPageController`
+
+Rules:
+- Controllers prepare page props.
+- Product operations still use `ProductService`.
+- Do not duplicate business logic in frontend controllers.
+
+---
+
+## Phase 7: Frontend Testing
+
+### Laravel Inertia Feature Tests
+- Guest redirected from dashboard
+- Authenticated user can open dashboard
+- Authenticated user can open product index
+- Product create page renders
+- Product edit page renders
+- Role-based page access
+- Validation errors returned to Inertia page
+
+### Frontend Build Test
+- `npm run build`
+- `npm run lint` if configured
+
+---
+
+## Phase 8: Documentation Updates
+
+Update:
+- `docs/technical-documentation.md`
+- `docs/user-guide.md`
+- `docs/testing-report.md`
+- `docs/presentation-outline.md`
+- `docs/presentation-script.md`
+
+Add:
+- `docs/frontend-architecture.md`
+- `docs/frontend-user-flow.md`
+- `docs/backend-review-checklist.md`
+
+---
+
+## Phase 9: Final Verification
+
+Run:
+
+```bash
+./vendor/bin/pint
+./vendor/bin/phpstan analyse --memory-limit=1G
+php artisan test
+npm run build
+```
+
+Expected:
+
+```text
+Backend Pint: PASS
+Backend PHPStan: PASS
+Backend PHPUnit: PASS
+Frontend Build: PASS
+```
